@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # Real-Time ASL Fingerspelling Recognition on Consumer Mobile Devices
 
 MSc Computing dissertation project — Atlantic Technological University,
@@ -16,7 +10,9 @@ network, and the resulting letter sequence is corrected against a
 dictionary using a confidence-weighted noisy-channel model.
 
 **Live demo:**
-<https://asl-master-project.vercel.app?_vercel_share=9vFwva1tltr4MGBn5IaZI8OZt3JH2fXb>
+<https://asl-master-project.vercel.app>
+
+**On Google Play:** [Fingerspell — ASL Reader](https://play.google.com/store/apps/details?id=com.ASLReader)
 
 ------------------------------------------------------------------------
 
@@ -40,8 +36,15 @@ halves of it.
 
 ## Reproducing the results
 
-The extracted landmark CSVs are included, so the experiments run without
-downloading the image datasets or repeating the extraction step.
+The three extracted landmark files are tracked in this repository, so the
+experiments run without downloading the image datasets or repeating the
+extraction step. Their row counts match Table 3.1 of the dissertation:
+
+| File | Rows | Source dataset |
+|---|---:|---|
+| `landmarks_train.csv` | 7,348 | Kaggle ASL Alphabet |
+| `landmarks_aslhg.csv` | 10,791 | ASL-HG |
+| `landmarks_signalphaset.csv` | 7,740 | SignAlphaSet (held out) |
 
 ``` bash
 pip install -r requirements.txt
@@ -71,8 +74,11 @@ python train_angle_features.py   --kaggle landmarks_train.csv --aslhg landmarks_
 3.  A **three-layer network** (63 → 64 → 32 → 26) classifies the letter
     and reports a softmax confidence.
 4.  A letter is **committed** after 1.4 s of stable prediction above a
-    confidence floor, giving roughly fourteen independent predictions
-    per committed letter at the configured inference rate.
+    confidence floor, giving roughly fourteen consecutive predictions
+    per committed letter at the configured inference rate. These are
+    successive frames of a held pose, not independent samples: they are
+    correlated, so the window buys stability against momentary dropouts
+    rather than fourteen times the evidence.
 5.  The word is **corrected** against a 7,228-word dictionary. Each
     candidate substitution costs `(1 − f[c][p]) · conf(p)`, where
     `f[c][p]` is the measured probability that true letter `c` is
@@ -142,14 +148,19 @@ the landmark CSVs from the source images.
 The image datasets are not redistributed here; only the extracted
 landmark coordinates are included.
 
-| Dataset             | Role     | Source        |
-|---------------------|----------|---------------|
-| Kaggle ASL Alphabet | Training | <!-- link --> |
-| ASL-HG              | Training | <!-- link --> |
-| SignAlphaSet        | Held out | <!-- link --> |
+| Dataset | Role | Source |
+|---|---|---|
+| Kaggle ASL Alphabet | Training | <https://www.kaggle.com/datasets/grassknoted/asl-alphabet> |
+| ASL-HG | Training | <https://doi.org/10.17632/j4y5w2c8w9.1> |
+| SignAlphaSet | Held out | <https://doi.org/10.17632/8fmvr9m98w.3> |
 
 ------------------------------------------------------------------------
 
 ## Version
 
-Results reported in the dissertation correspond to tag `v1.0-results`.
+Results reported in the dissertation correspond to tag
+`v2.1-dissertation`, which is the first tag to hold the landmark CSVs,
+`requirements.txt` and the dissertation PDF together with the code. The
+earlier `v1.0-results` tag predates
+`eval_multiseed_nn_v2.py`, which produced the word-level and augmentation
+figures, and does not cover the numbers in the submitted document.

@@ -5,6 +5,9 @@ SignAlphaSet/
 cropped_combined/
 cropped_signalphaset/
 *.csv
+!landmarks_train.csv
+!landmarks_aslhg.csv
+!landmarks_signalphaset.csv
 hand_landmarker.task
 *.keras
 *.h5
