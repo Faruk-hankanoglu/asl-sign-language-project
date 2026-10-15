@@ -1,7 +1,7 @@
 # Real-Time ASL Fingerspelling Recognition on Consumer Mobile Devices
 
 MSc Computing dissertation project — Atlantic Technological University,
-Galway Faruk Hankanoglu (G00486656) · Supervisor: Dr. Douglas Mota Dias
+Galway · Faruk Hankanoglu (G00486656) · Supervisor: Dr. Douglas Mota Dias
 
 A fingerspelling recognition system that runs entirely on an ordinary
 phone using only its camera: no glove, no depth sensor, no server. Hand
@@ -13,6 +13,7 @@ dictionary using a confidence-weighted noisy-channel model.
 <https://asl-master-project.vercel.app>
 
 **On Google Play:** [Fingerspell — ASL Reader](https://play.google.com/store/apps/details?id=com.ASLReader)
+
 **Screencast:** [`screencast.mp4`](screencast.mp4) — 7 min 15 s walkthrough of the application in operation
 
 **Dissertation:** [`dissertation.pdf`](dissertation.pdf)
@@ -141,6 +142,14 @@ correction layer is never scored on the errors it was calibrated from.
 | `landmarks_signalphaset.csv` | Landmarks from SignAlphaSet, held out |
 | `words10k.txt` | Dictionary used by the correction layer |
 
+### Submission
+
+| File | Purpose |
+|------------------------------------|------------------------------------|
+| `dissertation.pdf` | The dissertation as submitted, 58 pages |
+| `screencast.mp4` | Screencast of the application in operation, 7 min 15 s |
+| `requirements.txt` | Python dependencies for the scripts above |
+
 See `README_run_locally.md` for environment setup and for regenerating
 the landmark CSVs from the source images.
 
@@ -163,7 +172,8 @@ landmark coordinates are included.
 
 Results reported in the dissertation correspond to tag
 `v2.1-dissertation`, which is the first tag to hold the landmark CSVs,
-`requirements.txt` and the dissertation PDF together with the code. The
-earlier `v1.0-results` tag predates
-`eval_multiseed_nn_v2.py`, which produced the word-level and augmentation
-figures, and does not cover the numbers in the submitted document.
+`requirements.txt`, the dissertation PDF and the screencast together with
+the code. Neither earlier tag covers the numbers in the submitted
+document: `v1.0-results` predates `eval_multiseed_nn_v2.py`, which
+produced the word-level and augmentation figures, and
+`v2.0-dissertation` predates the landmark CSVs and the PDF.
