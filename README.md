@@ -13,6 +13,9 @@ dictionary using a confidence-weighted noisy-channel model.
 <https://asl-master-project.vercel.app>
 
 **On Google Play:** [Fingerspell — ASL Reader](https://play.google.com/store/apps/details?id=com.ASLReader)
+**Screencast:** [`screencast.mp4`](screencast.mp4) — 7 min 15 s walkthrough of the application in operation
+
+**Dissertation:** [`dissertation.pdf`](dissertation.pdf)
 
 ------------------------------------------------------------------------
 
